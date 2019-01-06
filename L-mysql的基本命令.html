@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>分类 | Gzhangming的个人博客</title>
+  <title>Linux下的mysql的基本命令 | Gzhangming的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给予GitHub的博客">
-<meta name="keywords" content="Linux, php, html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+  <meta name="description" content="查看服务器上的mysql是否启动 1. ps -ef |grep mysql 2. netstat -nlp    开启Mysql  systemctl start mysqld.service  （下bin目录下）  ./mysqld_safe &amp;amp;  关闭Mysql  systemctl stop mysqld.service  （在bin目录下）  ./mysqladmin -uro">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux下的mysql的基本命令">
+<meta property="og:url" content="http://yoursite.com/L-mysql的基本命令.html">
 <meta property="og:site_name" content="Gzhangming的个人博客">
-<meta property="og:description" content="给予GitHub的博客">
+<meta property="og:description" content="查看服务器上的mysql是否启动 1. ps -ef |grep mysql 2. netstat -nlp    开启Mysql  systemctl start mysqld.service  （下bin目录下）  ./mysqld_safe &amp;amp;  关闭Mysql  systemctl stop mysqld.service  （在bin目录下）  ./mysqladmin -uro">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-31T18:46:50.572Z">
+<meta property="og:updated_time" content="2019-01-06T12:10:24.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
-<meta name="twitter:description" content="给予GitHub的博客">
+<meta name="twitter:title" content="Linux下的mysql的基本命令">
+<meta name="twitter:description" content="查看服务器上的mysql是否启动 1. ps -ef |grep mysql 2. netstat -nlp    开启Mysql  systemctl start mysqld.service  （下bin目录下）  ./mysqld_safe &amp;amp;  关闭Mysql  systemctl stop mysqld.service  （在bin目录下）  ./mysqladmin -uro">
   
     <link rel="alternative" href="/atom.xml" title="Gzhangming的个人博客" type="application/atom+xml">
   
@@ -42,7 +42,7 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
           isTag: false,
           isCategory: false,
@@ -234,11 +234,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope="" itemprop="blogPost">
+      <div class="body-wrap"><article id="post-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/categories/index.html" class="article-date">
-      <time datetime="2018-12-31T18:41:38.000Z" itemprop="datePublished">2019-01-01</time>
+      <a href="/L-mysql的基本命令.html" class="article-date">
+      <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
 </a>
     </div>
   
@@ -251,7 +251,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      分类
+      Linux下的mysql的基本命令
     </h1>
   
 
@@ -261,6 +261,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -268,42 +272,87 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta {
-        display: none;
-    }
-    #container .article .article-title {
-        padding-right: 0;
-    }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover {
-        border-left: none;
-    }
-    .article-title {
-        font-size: 1.6em
-    }
-    .article-meta {
-        display: none;
-    }
-    .article-entry hr {
-        margin: 0;
-    }
-    #container .article-info-post.article-info {
-      display: none;
-      }
-    #container .article .article-title {
-    padding: 0;
-    }
-</style>
+        <ul>
+<li><p>查看服务器上的mysql是否启动</p>
+<pre><code>1. ps -ef |grep mysql
+2. netstat -nlp
+</code></pre></li>
+</ul>
+<ul>
+<li><p>开启Mysql</p>
+<pre><code> systemctl start mysqld.service
 
+（下bin目录下）
+ ./mysqld_safe &amp;
+</code></pre></li>
+<li><p>关闭Mysql</p>
+<pre><code> systemctl stop mysqld.service
 
-          
-        
+（在bin目录下）
+ ./mysqladmin -uroot -p shutdown
+</code></pre></li>
+</ul>
+<ul>
+<li><p>进入mysql的命令</p>
+<p>   mysql -u root -p</p>
+<pre><code>/usr/local/mysql5/bin/mysql
+</code></pre></li>
+<li><p>退出mysql</p>
+<pre><code>quit 或者 exit
+</code></pre></li>
+<li><p>查看mysql都有哪些数据库</p>
+<pre><code>show databases;
+</code></pre></li>
+<li><p>创建数据库命令</p>
+<pre><code>create database 数据库名字;        
+</code></pre></li>
+<li><p>进入数据库操作的命令</p>
+<pre><code>use 要进入数据库的名字
+</code></pre></li>
+<li><p>查看数据库里的表名</p>
+<pre><code>show tables;
+</code></pre></li>
+<li><p>创建表</p>
+<pre><code>create table 表名(表字段 表类型,等等);
+</code></pre></li>
+<li><p>查看建表语句</p>
+<pre><code>show create table 表名;
+</code></pre></li>
+<li><p>查看表字段</p>
+<pre><code>desc 表名;
+</code></pre></li>
+<li><p>表中插入数据</p>
+<pre><code>insert into 表名 (表字段，也可以用*代替全部自段) values (对应表字段);
+</code></pre></li>
+<li><p>查看表数据</p>
+<pre><code>select * from 表名;
+</code></pre></li>
+<li><p>条件查询</p>
+<pre><code>select * from 表名 where 条件（比如id=&apos;0003&apos;）;
+</code></pre></li>
+<li><p>多条件查询</p>
+<pre><code>and (多条件查询关键字 两边条件同时满足)  
+select * from 表名 where 条件（id=&apos;1&apos;） add 条件（name=&apos;name&apos;）;
+</code></pre></li>
+<li><p>模糊查询</p>
+<pre><code>like &quot;%%&quot;(模糊查询的关键字) 
+select * from 表名 where 查询的字段 like &quot;%wu%&quot;;
+</code></pre></li>
+<li><p>指定查询数据显示的条数</p>
+<pre><code>limit 条数(显示多条的关键字)
+select * from 表名 limit 条数
+select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
+</code></pre></li>
+</ul>
+<h5 id="服务器数据库与远程服务器建立连接"><a href="#服务器数据库与远程服务器建立连接" class="headerlink" title="服务器数据库与远程服务器建立连接"></a>服务器数据库与远程服务器建立连接</h5><ul>
+<li><p>服务器授权语句（就是授权那台机器可以访问）</p>
+<pre><code> (解读下面的语句= 允许Ip是196.168.9这台机器用zhang这个用户名和1234这个密码访问服务器中的名为user下的所有表)
+ grant all on user.* to zhang@&apos;196.168.9&apos; identified by &quot;1234&quot;;
+ grant all on 数据库名.* to 密码@&apos;ip&apos; identified by &quot;密码&quot;;
+（上面是可以查看修改 下面授权只能查看）
+</code></pre></li>
+</ul>
+
       
       
         <div class="page-reward">
@@ -357,10 +406,76 @@
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/L-mysql的基本命令.html">Linux下的mysql的基本命令</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Gzhangming 的个人博客">Gzhangming</a></p>
+        <p><span>发布时间:</span>2018年12月31日 - 15时01分</p>
+        <p><span>最后更新:</span>2019年01月06日 - 20时10分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/L-mysql的基本命令.html" title="Linux下的mysql的基本命令">http://yoursite.com/L-mysql的基本命令.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/L-mysql的基本命令.html　　作者: Gzhangming" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+<nav id="article-nav">
+  
+    <a href="/study-Hexo.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          study_Hexo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/CentOS7使用firewalld打开关闭防火墙与端口.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">服务器防火墙的操作</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#服务器数据库与远程服务器建立连接"><span class="toc-number">1.</span> <span class="toc-text">服务器数据库与远程服务器建立连接</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
 
 
 
@@ -396,6 +511,39 @@
     
 
 
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/study-Hexo.html" title="上一篇: study_Hexo">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/CentOS7使用firewalld打开关闭防火墙与端口.html" title="下一篇: 服务器防火墙的操作">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/study-Hexo.html">study_Hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/L-mysql的基本命令.html">Linux下的mysql的基本命令</a></li><li class="post-list-item"><a class="post-list-link" href="/CentOS7使用firewalld打开关闭防火墙与端口.html">服务器防火墙的操作</a></li><li class="post-list-item"><a class="post-list-link" href="/解决mysql不能用Ip登录问题.html">解决mysql不能用Ip登录问题</a></li><li class="post-list-item"><a class="post-list-link" href="/hexo-github搭建自己的博客.html">hexo学习</a></li><li class="post-list-item"><a class="post-list-link" href="/Idea实现ssm框架的增删改查.html">ssm框架的增删改查</a></li><li class="post-list-item"><a class="post-list-link" href="/W-mysql的基本命令.html">w8下的mysql基本命令</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
