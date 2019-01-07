@@ -154,7 +154,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Hexo博客-Next的学习目录/" style="font-size: 15px;">Hexo博客+Next的学习目录</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/服务器的学习/" style="font-size: 10px;">服务器的学习</a>
+                        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo博客-Next的学习目录/" style="font-size: 15px;">Hexo博客+Next的学习目录</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/服务器的学习/" style="font-size: 10px;">服务器的学习</a>
                     </div>
                 </section>
                 
@@ -329,10 +329,10 @@
 
 
   
-    <article id="post-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-git的基本操作命令" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/L-mysql的基本命令.html" class="article-date">
+      <a href="/git的基本操作命令.html" class="article-date">
       <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
 </a>
     </div>
@@ -346,7 +346,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/L-mysql的基本命令.html">Linux下的mysql的基本命令</a>
+      <a class="article-title" href="/git的基本操作命令.html">Git 常用命令详解（二）</a>
     </h1>
   
 
@@ -356,86 +356,121 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <ul>
-<li><p>查看服务器上的mysql是否启动</p>
-<pre><code>1. ps -ef |grep mysql
-2. netstat -nlp
-</code></pre></li>
+        <p>转自：<br><a href="http://blog.csdn.net/ithomer/article/details/7529022" target="_blank" rel="noopener">http://blog.csdn.net/ithomer/article/details/7529022</a></p>
+<ul>
+<li><p>Git 是一个很强大的分布式版本管理工具，它不但适用于管理大型开源软件的源代码（如：linux kernel），管理私人的文档和源代码也有很多优势（如：wsi-lgame-pro）</p>
+</li>
+<li><p>Git 的更多介绍，请参考我的上一篇博客：Git 版本管理工具</p>
+</li>
+</ul>
+<h4 id="一、-Git-命令初识"><a href="#一、-Git-命令初识" class="headerlink" title="一、 Git 命令初识"></a>一、 Git 命令初识</h4><ul>
+<li>在正式介绍Git命令之前，先介绍一下Git 的基本命令和操作，对Git命令有一个总体的认识</li>
+</ul>
+<p>示例：从Git 版本库的初始化，通常有两种方式：</p>
+<p>1）git clone：这是一种较为简单的初始化方式，当你已经有一个远程的Git版本库，只需要在本地克隆一份</p>
+<p>例如：git  clone  git://github.com/someone/some_project.git   some_project </p>
+<p>上面的命令就是将’git://github.com/someone/some_project.git’这个URL地址的远程版本库，完全克隆到本地some_project目录下</p>
+<p>2）git init 和 git remote：这种方式稍微复杂一些，当你本地创建了一个工作目录，你可以进入这个目录，使用’git init’命令进行初始化；Git以后就会对该目录下的文件进行版本控制，这时候如果你需要将它放到远程服务器上，可以在远程服务器上创建一个目录，并把可访问的URL记录下来，此时你就可以利用’git remote add’命令来增加一个远程服务器端，</p>
+<p>例如：git  remote  add  origin  git://github.com/someone/another_project.git</p>
+<p>上面的命令就会增加URL地址为’git: //github.com/someone/another_project.git’，名称为origin的远程服务器，以后提交代码的时候只需要使用 origin别名即可</p>
+<h5 id="二、-Git-常用命令"><a href="#二、-Git-常用命令" class="headerlink" title="二、 Git 常用命令"></a>二、 Git 常用命令</h5><p>1) 远程仓库相关命令</p>
+<ul>
+<li><p>检出仓库：$ git clone git://github.com/jquery/jquery.git</p>
+</li>
+<li><p>查看远程仓库：$ git remote -v</p>
+</li>
+<li><p>添加远程仓库：$ git remote add [name] [url]</p>
+</li>
+<li><p>删除远程仓库：$ git remote rm [name]</p>
+</li>
+<li><p>修改远程仓库：$ git remote set-url –push [name] [newUrl]</p>
+</li>
+<li><p>拉取远程仓库：$ git pull [remoteName] [localBranchName]</p>
+</li>
+<li><p>推送远程仓库：$ git push [remoteName] [localBranchName]</p>
+</li>
+</ul>
+<p>*如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，如下：</p>
+<ul>
+<li><p>$git push origin test:master         // 提交本地test分支作为远程的master分支</p>
+</li>
+<li><p>$git push origin test:test              // 提交本地test分支作为远程的test分支</p>
+</li>
+</ul>
+<p>2）分支(branch)操作相关命令</p>
+<ul>
+<li><p>查看本地分支：$ git branch</p>
+</li>
+<li><p>查看远程分支：$ git branch -r</p>
+</li>
+<li><p>创建本地分支：$ git branch [name] —-注意新分支创建后不会自动切换为当前分支</p>
+</li>
+<li><p>切换分支：$ git checkout [name]</p>
+</li>
+<li><p>创建新分支并立即切换到新分支：$ git checkout -b [name]</p>
+</li>
+<li><p>删除分支：$ git branch -d [name] —- -d选项只能删除已经参与了合并的分支，对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用-D选项</p>
+</li>
+<li><p>合并分支：$ git merge [name] —-将名称为[name]的分支与当前分支合并</p>
+</li>
+<li><p>创建远程分支(本地分支push到远程)：$ git push origin [name]</p>
+</li>
+<li><p>删除远程分支：$ git push origin :heads/[name] 或 $ gitpush origin :[name] </p>
+</li>
+</ul>
+<p>*创建空的分支：(执行命令之前记得先提交你当前分支的修改，否则会被强制删干净没得后悔)</p>
+<ul>
+<li><p>$git symbolic-ref HEAD refs/heads/[name]</p>
+</li>
+<li><p>$rm .git/index</p>
+</li>
+<li><p>$git clean -fdx</p>
+</li>
+</ul>
+<p>3）版本(tag)操作相关命令</p>
+<ul>
+<li><p>查看版本：$ git tag</p>
+</li>
+<li><p>创建版本：$ git tag [name]</p>
+</li>
+<li><p>删除版本：$ git tag -d [name]</p>
+</li>
+<li><p>查看远程版本：$ git tag -r</p>
+</li>
+<li><p>创建远程版本(本地版本push到远程)：$ git push origin [name]</p>
+</li>
+<li><p>删除远程版本：$ git push origin :refs/tags/[name]</p>
+</li>
+<li><p>合并远程仓库的tag到本地：$ git pull origin –tags</p>
+</li>
+<li><p>上传本地tag到远程仓库：$ git push origin –tags</p>
+</li>
+<li><p>创建带注释的tag：$ git tag -a [name] -m ‘yourMessage’</p>
+</li>
+</ul>
+<p>4) 子模块(submodule)相关操作命令</p>
+<ul>
+<li>添加子模块：$ git submodule add [url] [path]</li>
+</ul>
+<p>如：$git submodule add git://github.com/soberh/ui-libs.git src/main/webapp/ui-libs</p>
+<ul>
+<li><p>初始化子模块：$ git submodule init  —-只在首次检出仓库时运行一次就行</p>
+</li>
+<li><p>更新子模块：$ git submodule update —-每次更新或切换分支后都需要运行一下</p>
+</li>
 </ul>
 <ul>
-<li><p>开启Mysql</p>
-<pre><code> systemctl start mysqld.service
-
-（下bin目录下）
- ./mysqld_safe &amp;
-</code></pre></li>
-<li><p>关闭Mysql</p>
-<pre><code> systemctl stop mysqld.service
-
-（在bin目录下）
- ./mysqladmin -uroot -p shutdown
-</code></pre></li>
+<li>删除子模块：（分4步走哦）</li>
 </ul>
-<ul>
-<li><p>进入mysql的命令</p>
-<p>   mysql -u root -p</p>
-<pre><code>/usr/local/mysql5/bin/mysql
-</code></pre></li>
-<li><p>退出mysql</p>
-<pre><code>quit 或者 exit
-</code></pre></li>
-<li><p>查看mysql都有哪些数据库</p>
-<pre><code>show databases;
-</code></pre></li>
-<li><p>创建数据库命令</p>
-<pre><code>create database 数据库名字;        
-</code></pre></li>
-<li><p>进入数据库操作的命令</p>
-<pre><code>use 要进入数据库的名字
-</code></pre></li>
-<li><p>查看数据库里的表名</p>
-<pre><code>show tables;
-</code></pre></li>
-<li><p>创建表</p>
-<pre><code>create table 表名(表字段 表类型,等等);
-</code></pre></li>
-<li><p>查看建表语句</p>
-<pre><code>show create table 表名;
-</code></pre></li>
-<li><p>查看表字段</p>
-<pre><code>desc 表名;
-</code></pre></li>
-<li><p>表中插入数据</p>
-<pre><code>insert into 表名 (表字段，也可以用*代替全部自段) values (对应表字段);
-</code></pre></li>
-<li><p>查看表数据</p>
-<pre><code>select * from 表名;
-</code></pre></li>
-<li><p>条件查询</p>
-<pre><code>select * from 表名 where 条件（比如id=&apos;0003&apos;）;
-</code></pre></li>
-<li><p>多条件查询</p>
-<pre><code>and (多条件查询关键字 两边条件同时满足)  
-select * from 表名 where 条件（id=&apos;1&apos;） add 条件（name=&apos;name&apos;）;
-</code></pre></li>
-<li><p>模糊查询</p>
-<pre><code>like &quot;%%&quot;(模糊查询的关键字) 
-select * from 表名 where 查询的字段 like &quot;%wu%&quot;;
-</code></pre></li>
-<li><p>指定查询数据显示的条数</p>
-<pre><code>limit 条数(显示多条的关键字)
-select * from 表名 limit 条数
-select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
-</code></pre></li>
-</ul>
-<h5 id="服务器数据库与远程服务器建立连接"><a href="#服务器数据库与远程服务器建立连接" class="headerlink" title="服务器数据库与远程服务器建立连接"></a>服务器数据库与远程服务器建立连接</h5><ul>
-<li><p>服务器授权语句（就是授权那台机器可以访问）</p>
-<pre><code> (解读下面的语句= 允许Ip是196.168.9这台机器用zhang这个用户名和1234这个密码访问服务器中的名为user下的所有表)
- grant all on user.* to zhang@&apos;196.168.9&apos; identified by &quot;1234&quot;;
- grant all on 数据库名.* to 密码@&apos;ip&apos; identified by &quot;密码&quot;;
-（上面是可以查看修改 下面授权只能查看）
-</code></pre></li>
-</ul>
+<p>1) $ git rm –cached [path]</p>
+<p>2) 编辑“.gitmodules”文件，将子模块的相关配置节点删除掉</p>
+<p>3) 编辑“ .git/config”文件，将子模块的相关配置节点删除掉</p>
+<p>4) 手动删除子模块残留的目录</p>
+<p>5）忽略一些文件、文件夹不提交</p>
+<p>在仓库根目录下创建名称为“.gitignore”的文件，写入不需要的文件夹名或文件，每个元素占一行即可，如</p>
+<p>target</p>
+<p>bin</p>
+<p>*.db</p>
 
       
       
@@ -447,7 +482,7 @@ select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
     </div>
 
       
@@ -760,6 +795,144 @@ git config --global user.email 邮箱
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客-Next的学习目录/">Hexo博客+Next的学习目录</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/L-mysql的基本命令.html" class="article-date">
+      <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/L-mysql的基本命令.html">Linux下的mysql的基本命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li><p>查看服务器上的mysql是否启动</p>
+<pre><code>1. ps -ef |grep mysql
+2. netstat -nlp
+</code></pre></li>
+</ul>
+<ul>
+<li><p>开启Mysql</p>
+<pre><code> systemctl start mysqld.service
+
+（下bin目录下）
+ ./mysqld_safe &amp;
+</code></pre></li>
+<li><p>关闭Mysql</p>
+<pre><code> systemctl stop mysqld.service
+
+（在bin目录下）
+ ./mysqladmin -uroot -p shutdown
+</code></pre></li>
+</ul>
+<ul>
+<li><p>进入mysql的命令</p>
+<p>   mysql -u root -p</p>
+<pre><code>/usr/local/mysql5/bin/mysql
+</code></pre></li>
+<li><p>退出mysql</p>
+<pre><code>quit 或者 exit
+</code></pre></li>
+<li><p>查看mysql都有哪些数据库</p>
+<pre><code>show databases;
+</code></pre></li>
+<li><p>创建数据库命令</p>
+<pre><code>create database 数据库名字;        
+</code></pre></li>
+<li><p>进入数据库操作的命令</p>
+<pre><code>use 要进入数据库的名字
+</code></pre></li>
+<li><p>查看数据库里的表名</p>
+<pre><code>show tables;
+</code></pre></li>
+<li><p>创建表</p>
+<pre><code>create table 表名(表字段 表类型,等等);
+</code></pre></li>
+<li><p>查看建表语句</p>
+<pre><code>show create table 表名;
+</code></pre></li>
+<li><p>查看表字段</p>
+<pre><code>desc 表名;
+</code></pre></li>
+<li><p>表中插入数据</p>
+<pre><code>insert into 表名 (表字段，也可以用*代替全部自段) values (对应表字段);
+</code></pre></li>
+<li><p>查看表数据</p>
+<pre><code>select * from 表名;
+</code></pre></li>
+<li><p>条件查询</p>
+<pre><code>select * from 表名 where 条件（比如id=&apos;0003&apos;）;
+</code></pre></li>
+<li><p>多条件查询</p>
+<pre><code>and (多条件查询关键字 两边条件同时满足)  
+select * from 表名 where 条件（id=&apos;1&apos;） add 条件（name=&apos;name&apos;）;
+</code></pre></li>
+<li><p>模糊查询</p>
+<pre><code>like &quot;%%&quot;(模糊查询的关键字) 
+select * from 表名 where 查询的字段 like &quot;%wu%&quot;;
+</code></pre></li>
+<li><p>指定查询数据显示的条数</p>
+<pre><code>limit 条数(显示多条的关键字)
+select * from 表名 limit 条数
+select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
+</code></pre></li>
+</ul>
+<h5 id="服务器数据库与远程服务器建立连接"><a href="#服务器数据库与远程服务器建立连接" class="headerlink" title="服务器数据库与远程服务器建立连接"></a>服务器数据库与远程服务器建立连接</h5><ul>
+<li><p>服务器授权语句（就是授权那台机器可以访问）</p>
+<pre><code> (解读下面的语句= 允许Ip是196.168.9这台机器用zhang这个用户名和1234这个密码访问服务器中的名为user下的所有表)
+ grant all on user.* to zhang@&apos;196.168.9&apos; identified by &quot;1234&quot;;
+ grant all on 数据库名.* to 密码@&apos;ip&apos; identified by &quot;密码&quot;;
+（上面是可以查看修改 下面授权只能查看）
+</code></pre></li>
+</ul>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
 
       
