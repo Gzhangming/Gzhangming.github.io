@@ -238,76 +238,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-spring-springboot验证码" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/spring-springboot验证码.html" class="article-date">
-      <time datetime="2018-12-31T08:24:01.000Z" itemprop="datePublished">2018-12-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/spring-springboot验证码.html">登录注册</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="SpringBoot注册登录-二-：注册—验证码kaptcha的实现"><a href="#SpringBoot注册登录-二-：注册—验证码kaptcha的实现" class="headerlink" title="SpringBoot注册登录(二)：注册—验证码kaptcha的实现"></a>SpringBoot注册登录(二)：注册—验证码kaptcha的实现</h2><p><a href="https://blog.csdn.net/qq_36688143/article/details/79476576" target="_blank" rel="noopener">https://blog.csdn.net/qq_36688143/article/details/79476576</a></p>
-<p>注意：要在启动类加上自己编写的配置文件，在本例中的配置文件为mykaptcha.xml</p>
-<p>​           <code>@ImportResource(locations={&quot;classpath:mykaptcha.xml&quot;})</code>  </p>
-<p>①先引入jar</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- begin:kaptcha验证码 --&gt;</span><br><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/com.github.penggle/kaptcha --&gt;  </span></span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line"> &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;  </span><br><span class="line"> 			  &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;  </span><br><span class="line">			  &lt;version&gt;2.3.2&lt;/version&gt;  </span><br><span class="line">	&lt;/dependency&gt;  </span><br><span class="line">	&lt;!-- end:kaptcha验证码 --&gt;</span><br></pre></td></tr></table></figure>
-<p>②新建配置文件mykaptcha.xml</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;  </span><br><span class="line">&lt;beans xmlns=<span class="string">"http://www.springframework.org/schema/beans"</span>  </span><br><span class="line">    xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span><br><span class="line">    xsi:schemaLocation=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;  </span><br><span class="line">    &lt;bean id=<span class="string">"captchaProducer"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.google.code.kaptcha.impl.DefaultKaptcha"</span>&gt;</span><br><span class="line">        &lt;property name=<span class="string">"config"</span>&gt;</span><br><span class="line">            &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.google.code.kaptcha.util.Config"</span>&gt;</span><br><span class="line">                &lt;constructor-arg&gt;</span><br><span class="line">                    &lt;props&gt;</span><br><span class="line">                        &lt;!--Border around kaptcha. Legal values are yes or no. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.border"&gt;no&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Color of the border. Legal values are r,g,b (and optional alpha) or white,black,blue. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.border.color"&gt;red&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Thickness of the border around kaptcha. Legal values are &gt; <span class="number">0</span>. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.border.thickness"&gt;5&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Width in pixels of the kaptcha image. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.image.width"&gt;80&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Height in pixels of the kaptcha image. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.image.height"&gt;30&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The image producer. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.producer.impl"&gt;com.google.code.kaptcha.impl.DefaultKaptcha &lt;/prop&gt;</span><br><span class="line">                        &lt;!--The text producer. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.impl"&gt;com.google.code.kaptcha.text.impl.DefaultTextCreator&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The characters that will create the kaptcha. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.char.string"&gt;abcde2345678gfynmnpwx &lt;/prop&gt;</span><br><span class="line">                        &lt;!--The number of characters to display. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.char.length"&gt;4&lt;/prop&gt;</span><br><span class="line">                        &lt;!--A list of comma separated font names. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.font.names"&gt;宋体,楷体,微软雅黑&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The size of the font to use. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.font.size"&gt;20&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The color to use <span class="keyword">for</span> the font. Legal values are r,g,b. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.font.color"&gt;black&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The noise producer. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.noise.impl"&gt;com.google.code.kaptcha.impl.NoNoise &lt;/prop&gt;</span><br><span class="line">                        &lt;!--The noise color. Legal values are r,g,b. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.noise.color"&gt;black&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The obscurificator implementation. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.obscurificator.impl"&gt;com.google.code.kaptcha.impl.ShadowGimpy&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The background implementation. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.background.impl"&gt;com.google.code.kaptcha.impl.DefaultBackground&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Ending background color. Legal values are r,g,b. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.background.clear.to"&gt;white&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The word renderer implementation. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.word.impl"&gt;com.google.code.kaptcha.text.impl.DefaultWordRenderer&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The value <span class="keyword">for</span> the kaptcha is generated and is put into the HttpSession. This is the key value <span class="keyword">for</span> that item in the session. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.session.key"&gt;KAPTCHA_SESSION_KEY&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The date the kaptcha is generated is put into the HttpSession. This is the key value <span class="keyword">for</span> that item in the session. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.session.date"&gt;KAPTCHA_SESSION_DATE&lt;/prop&gt;</span><br><span class="line">                    &lt;/props&gt;</span><br><span class="line">                &lt;/constructor-arg&gt;</span><br><span class="line">            &lt;/bean&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt; </span><br><span class="line">  </span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
-<p>③新建两个Controller</p>
-<p>NewKaptchaController：点击图片更换<a href="https://www.baidu.com/s?wd=%E9%AA%8C%E8%AF%81%E7%A0%81&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">验证码</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.fxy.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.ModelAndView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.code.kaptcha.Constants;</span><br><span class="line"><span class="keyword">import</span> com.google.code.kaptcha.Producer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewKaptchaController</span> </span>&#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ClassName: CaptchaImageCreateController</span></span><br><span class="line"><span class="comment"> * Function: 生成验证码Controller.</span></span><br><span class="line"><span class="comment"> * date: </span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Producer captchaProducer = <span class="keyword">null</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCaptchaProducer</span><span class="params">(Producer captchaProducer)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.captchaProducer = captchaProducer;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"kaptcha.jpg"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleRequest</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">// Set to expire far in the past.</span></span><br><span class="line">        response.setDateHeader(<span class="string">"Expires"</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// Set standard HTTP/1.1 no-cache headers.</span></span><br><span class="line">        response.setHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-store, no-cache, must-revalidate"</span>);</span><br><span class="line">        <span class="comment">// Set IE extended HTTP/1.1 no-cache headers (use addHeader).</span></span><br><span class="line">        response.addHeader(<span class="string">"Cache-Control"</span>, <span class="string">"post-check=0, pre-check=0"</span>);</span><br><span class="line">        <span class="comment">// Set standard HTTP/1.0 no-cache header.</span></span><br><span class="line">        response.setHeader(<span class="string">"Pragma"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// return a jpeg</span></span><br><span class="line">        response.setContentType(<span class="string">"image/jpeg"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// create the text for the image</span></span><br><span class="line">        String capText = captchaProducer.createText();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// store the text in the session</span></span><br><span class="line">        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// create the image with the text</span></span><br><span class="line">        BufferedImage bi = captchaProducer.createImage(capText);</span><br><span class="line"> </span><br><span class="line">        ServletOutputStream out = response.getOutputStream();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// write the data out</span></span><br><span class="line">        ImageIO.write(bi, <span class="string">"jpg"</span>, out);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            out.flush();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<p>KaptchaController：校验验证码是否正确</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.fxy.controller;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KaptchaController</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> <span class="keyword">transient</span> Logger log = Logger.getLogger(KaptchaController.class);</span><br><span class="line">	    <span class="comment">/**</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@Title</span>: loginCheck</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@param</span> kaptchaReceived</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@return</span> String</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@Description</span>:  验证码登录</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@author</span>: fxy</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@date</span>: 2017年11月21日</span></span><br><span class="line"><span class="comment">	     */</span></span><br><span class="line">	    <span class="meta">@RequestMapping</span>(value = <span class="string">"kaptcha"</span>, method = RequestMethod.POST)</span><br><span class="line">	    <span class="meta">@ResponseBody</span></span><br><span class="line">	    <span class="function"><span class="keyword">public</span> String <span class="title">loginCheck</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">//	            @RequestParam(value = <span class="string">"username"</span>, required = <span class="keyword">true</span>)</span> String username,</span></span><br><span class="line"><span class="function"><span class="comment">//	            @RequestParam(value = "password", required = true) String password,</span></span></span><br><span class="line"><span class="function">	            @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"kaptcha"</span>, required = <span class="keyword">true</span>)</span> String kaptchaReceived)</span>&#123;</span><br><span class="line">	        <span class="comment">//用户输入的验证码的值</span></span><br><span class="line">	        String kaptchaExpected = (String) request.getSession().getAttribute(</span><br><span class="line">	                com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);</span><br><span class="line"><span class="comment">//校验验证码是否正确</span></span><br><span class="line">        <span class="keyword">if</span> (kaptchaReceived == <span class="keyword">null</span> || !kaptchaReceived.equals(kaptchaExpected)) &#123;</span><br><span class="line">        	 log.info(<span class="string">"验证码错了"</span>);</span><br><span class="line">        	<span class="keyword">return</span> <span class="string">"kaptcha_error"</span>;<span class="comment">//返回验证码错误</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//校验用户名密码</span></span><br><span class="line">        <span class="comment">// ……</span></span><br><span class="line">        <span class="comment">// ……</span></span><br><span class="line">        log.info(<span class="string">"验证码对了"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"success"</span>; <span class="comment">//校验通过返回成功</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-study-Hexo" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -380,6 +310,76 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客-Next的学习目录/">Hexo博客+Next的学习目录</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-spring-springboot验证码" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/spring-springboot验证码.html" class="article-date">
+      <time datetime="2018-12-31T08:24:01.000Z" itemprop="datePublished">2018-12-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/spring-springboot验证码.html">登录注册</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="SpringBoot注册登录-二-：注册—验证码kaptcha的实现"><a href="#SpringBoot注册登录-二-：注册—验证码kaptcha的实现" class="headerlink" title="SpringBoot注册登录(二)：注册—验证码kaptcha的实现"></a>SpringBoot注册登录(二)：注册—验证码kaptcha的实现</h2><p><a href="https://blog.csdn.net/qq_36688143/article/details/79476576" target="_blank" rel="noopener">https://blog.csdn.net/qq_36688143/article/details/79476576</a></p>
+<p>注意：要在启动类加上自己编写的配置文件，在本例中的配置文件为mykaptcha.xml</p>
+<p>​           <code>@ImportResource(locations={&quot;classpath:mykaptcha.xml&quot;})</code>  </p>
+<p>①先引入jar</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- begin:kaptcha验证码 --&gt;</span><br><span class="line">&lt;!-- https:<span class="comment">//mvnrepository.com/artifact/com.github.penggle/kaptcha --&gt;  </span></span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line"> &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;  </span><br><span class="line"> 			  &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;  </span><br><span class="line">			  &lt;version&gt;2.3.2&lt;/version&gt;  </span><br><span class="line">	&lt;/dependency&gt;  </span><br><span class="line">	&lt;!-- end:kaptcha验证码 --&gt;</span><br></pre></td></tr></table></figure>
+<p>②新建配置文件mykaptcha.xml</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;  </span><br><span class="line">&lt;beans xmlns=<span class="string">"http://www.springframework.org/schema/beans"</span>  </span><br><span class="line">    xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span><br><span class="line">    xsi:schemaLocation=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;  </span><br><span class="line">    &lt;bean id=<span class="string">"captchaProducer"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.google.code.kaptcha.impl.DefaultKaptcha"</span>&gt;</span><br><span class="line">        &lt;property name=<span class="string">"config"</span>&gt;</span><br><span class="line">            &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"com.google.code.kaptcha.util.Config"</span>&gt;</span><br><span class="line">                &lt;constructor-arg&gt;</span><br><span class="line">                    &lt;props&gt;</span><br><span class="line">                        &lt;!--Border around kaptcha. Legal values are yes or no. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.border"&gt;no&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Color of the border. Legal values are r,g,b (and optional alpha) or white,black,blue. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.border.color"&gt;red&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Thickness of the border around kaptcha. Legal values are &gt; <span class="number">0</span>. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.border.thickness"&gt;5&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Width in pixels of the kaptcha image. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.image.width"&gt;80&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Height in pixels of the kaptcha image. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.image.height"&gt;30&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The image producer. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.producer.impl"&gt;com.google.code.kaptcha.impl.DefaultKaptcha &lt;/prop&gt;</span><br><span class="line">                        &lt;!--The text producer. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.impl"&gt;com.google.code.kaptcha.text.impl.DefaultTextCreator&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The characters that will create the kaptcha. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.char.string"&gt;abcde2345678gfynmnpwx &lt;/prop&gt;</span><br><span class="line">                        &lt;!--The number of characters to display. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.char.length"&gt;4&lt;/prop&gt;</span><br><span class="line">                        &lt;!--A list of comma separated font names. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.font.names"&gt;宋体,楷体,微软雅黑&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The size of the font to use. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.font.size"&gt;20&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The color to use <span class="keyword">for</span> the font. Legal values are r,g,b. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.textproducer.font.color"&gt;black&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The noise producer. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.noise.impl"&gt;com.google.code.kaptcha.impl.NoNoise &lt;/prop&gt;</span><br><span class="line">                        &lt;!--The noise color. Legal values are r,g,b. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.noise.color"&gt;black&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The obscurificator implementation. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.obscurificator.impl"&gt;com.google.code.kaptcha.impl.ShadowGimpy&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The background implementation. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.background.impl"&gt;com.google.code.kaptcha.impl.DefaultBackground&lt;/prop&gt;</span><br><span class="line">                        &lt;!--Ending background color. Legal values are r,g,b. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.background.clear.to"&gt;white&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The word renderer implementation. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.word.impl"&gt;com.google.code.kaptcha.text.impl.DefaultWordRenderer&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The value <span class="keyword">for</span> the kaptcha is generated and is put into the HttpSession. This is the key value <span class="keyword">for</span> that item in the session. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.session.key"&gt;KAPTCHA_SESSION_KEY&lt;/prop&gt;</span><br><span class="line">                        &lt;!--The date the kaptcha is generated is put into the HttpSession. This is the key value <span class="keyword">for</span> that item in the session. --&gt;</span><br><span class="line">                        &lt;prop key="kaptcha.session.date"&gt;KAPTCHA_SESSION_DATE&lt;/prop&gt;</span><br><span class="line">                    &lt;/props&gt;</span><br><span class="line">                &lt;/constructor-arg&gt;</span><br><span class="line">            &lt;/bean&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;/bean&gt; </span><br><span class="line">  </span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<p>③新建两个Controller</p>
+<p>NewKaptchaController：点击图片更换<a href="https://www.baidu.com/s?wd=%E9%AA%8C%E8%AF%81%E7%A0%81&amp;tn=24004469_oem_dg&amp;rsv_dl=gh_pl_sl_csd" target="_blank" rel="noopener">验证码</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.fxy.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.ModelAndView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.code.kaptcha.Constants;</span><br><span class="line"><span class="keyword">import</span> com.google.code.kaptcha.Producer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewKaptchaController</span> </span>&#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ClassName: CaptchaImageCreateController</span></span><br><span class="line"><span class="comment"> * Function: 生成验证码Controller.</span></span><br><span class="line"><span class="comment"> * date: </span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Producer captchaProducer = <span class="keyword">null</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCaptchaProducer</span><span class="params">(Producer captchaProducer)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.captchaProducer = captchaProducer;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"kaptcha.jpg"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleRequest</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">// Set to expire far in the past.</span></span><br><span class="line">        response.setDateHeader(<span class="string">"Expires"</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="comment">// Set standard HTTP/1.1 no-cache headers.</span></span><br><span class="line">        response.setHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-store, no-cache, must-revalidate"</span>);</span><br><span class="line">        <span class="comment">// Set IE extended HTTP/1.1 no-cache headers (use addHeader).</span></span><br><span class="line">        response.addHeader(<span class="string">"Cache-Control"</span>, <span class="string">"post-check=0, pre-check=0"</span>);</span><br><span class="line">        <span class="comment">// Set standard HTTP/1.0 no-cache header.</span></span><br><span class="line">        response.setHeader(<span class="string">"Pragma"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// return a jpeg</span></span><br><span class="line">        response.setContentType(<span class="string">"image/jpeg"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// create the text for the image</span></span><br><span class="line">        String capText = captchaProducer.createText();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// store the text in the session</span></span><br><span class="line">        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// create the image with the text</span></span><br><span class="line">        BufferedImage bi = captchaProducer.createImage(capText);</span><br><span class="line"> </span><br><span class="line">        ServletOutputStream out = response.getOutputStream();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// write the data out</span></span><br><span class="line">        ImageIO.write(bi, <span class="string">"jpg"</span>, out);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            out.flush();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>KaptchaController：校验验证码是否正确</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.fxy.controller;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KaptchaController</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> <span class="keyword">transient</span> Logger log = Logger.getLogger(KaptchaController.class);</span><br><span class="line">	    <span class="comment">/**</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@Title</span>: loginCheck</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@param</span> kaptchaReceived</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@return</span> String</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@Description</span>:  验证码登录</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@author</span>: fxy</span></span><br><span class="line"><span class="comment">	     * <span class="doctag">@date</span>: 2017年11月21日</span></span><br><span class="line"><span class="comment">	     */</span></span><br><span class="line">	    <span class="meta">@RequestMapping</span>(value = <span class="string">"kaptcha"</span>, method = RequestMethod.POST)</span><br><span class="line">	    <span class="meta">@ResponseBody</span></span><br><span class="line">	    <span class="function"><span class="keyword">public</span> String <span class="title">loginCheck</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">//	            @RequestParam(value = <span class="string">"username"</span>, required = <span class="keyword">true</span>)</span> String username,</span></span><br><span class="line"><span class="function"><span class="comment">//	            @RequestParam(value = "password", required = true) String password,</span></span></span><br><span class="line"><span class="function">	            @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"kaptcha"</span>, required = <span class="keyword">true</span>)</span> String kaptchaReceived)</span>&#123;</span><br><span class="line">	        <span class="comment">//用户输入的验证码的值</span></span><br><span class="line">	        String kaptchaExpected = (String) request.getSession().getAttribute(</span><br><span class="line">	                com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);</span><br><span class="line"><span class="comment">//校验验证码是否正确</span></span><br><span class="line">        <span class="keyword">if</span> (kaptchaReceived == <span class="keyword">null</span> || !kaptchaReceived.equals(kaptchaExpected)) &#123;</span><br><span class="line">        	 log.info(<span class="string">"验证码错了"</span>);</span><br><span class="line">        	<span class="keyword">return</span> <span class="string">"kaptcha_error"</span>;<span class="comment">//返回验证码错误</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//校验用户名密码</span></span><br><span class="line">        <span class="comment">// ……</span></span><br><span class="line">        <span class="comment">// ……</span></span><br><span class="line">        log.info(<span class="string">"验证码对了"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"success"</span>; <span class="comment">//校验通过返回成功</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
     </div>
 
       
@@ -647,10 +647,10 @@
 
 
   
-    <article id="post-hexo-github搭建自己的博客" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/hexo-github搭建自己的博客.html" class="article-date">
+      <a href="/L-mysql的基本命令.html" class="article-date">
       <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
 </a>
     </div>
@@ -664,7 +664,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/hexo-github搭建自己的博客.html">hexo学习</a>
+      <a class="article-title" href="/L-mysql的基本命令.html">Linux下的mysql的基本命令</a>
     </h1>
   
 
@@ -674,101 +674,86 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>1 . 安装node.js</p>
-<ul>
-<li><p>也可以官网下载</p>
-</li>
-<li><p>下载地址 链接：<a href="https://pan.baidu.com/s/1B3BDbJCcpVzEI6lmD0OEaQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1B3BDbJCcpVzEI6lmD0OEaQ</a><br>   提取码：dgpq </p>
-</li>
-<li><p>一直next下去</p>
-</li>
-<li><p>查看是否安装成功  打开命令行  输入 node -v  显示版本号说明成功</p>
-</li>
-</ul>
-<p>2 . 注册gitHub</p>
-<ul>
-<li><p>打开官网 <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
-</li>
-<li><p>不会注册的可以自行百度</p>
-</li>
-<li><p>创建项目 new repository </p>
-</li>
-<li><p>输入项目名 必须是你的 用户名.github.io</p>
-</li>
-<li><p>勾选public </p>
-</li>
-<li><p>勾选initializ ……………..</p>
-</li>
-<li><p>然后Create repositorty</p>
-</li>
-<li><p>创建成功  </p>
-</li>
-</ul>
-<p>3 . Git 安装</p>
-<p>也可以官网下载（我的是w8）</p>
-<p>-链接：<a href="https://pan.baidu.com/s/1_odiVJQ7WWfWmRC33YmjLQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1_odiVJQ7WWfWmRC33YmjLQ</a><br> 提取码：td45 </p>
-<ul>
-<li>也是一直next下去</li>
-</ul>
-<p>-测试是否成功  打开cmd  输入 git  有显示成功！</p>
-<p>4 . githubSSH配置（看不懂了可以转达到git教程上进行学习）</p>
-<ul>
-<li>打开git 命令行</li>
-<li>输入 ssh-keygen -t rsa -C “自己的邮箱”</li>
-<li><p>然后回车 </p>
-</li>
-<li><p>找到下载好的文件 （.git）</p>
-</li>
-<li>复制到gitHub上进行设置</li>
-</ul>
-<p>5 . 使用hexo</p>
-<ul>
-<li><p>打看 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a> 官网</p>
-</li>
-<li><p>你想安装到哪里就在哪里创建文件夹 </p>
-</li>
-<li>然后右键打看git B…</li>
-<li><p>输入  npm install hexo-cli -g </p>
-</li>
-<li><p>等待安装 </p>
-</li>
-<li><p>初始化 hexo init 名字 （工程名字 随便）</p>
-</li>
-<li><p>cd 你起得名字 </p>
-</li>
-<li><p>npm install</p>
-</li>
-<li><p>hexo s -p8080 (本地运行)</p>
-</li>
-<li><p>成功测试  在浏览器上输入localhost:8080  就会出现画面</p>
-</li>
-</ul>
-<p>6 . 部署到GitHub 上</p>
-<p>在开始之前，您必须先在 _config.yml 中修改参数（在项目下找到）</p>
-<p>修改最下面  </p>
-<pre><code> deploy:
-  type: git
-  repo:
-type: heroku（git上考的地址）
-repo:
-</code></pre><p>下载插件<br>   执行   npm install hexo-deployer-git –save</p>
-<pre><code>deploy:
- type: git
- repo: &lt;repository url&gt; #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
- branch: [branch] #published
- message: [message]
-</code></pre><ul>
-<li><p>执行 </p>
-<pre><code>hexo -g 
-hexo -d
+        <ul>
+<li><p>查看服务器上的mysql是否启动</p>
+<pre><code>1. ps -ef |grep mysql
+2. netstat -nlp
 </code></pre></li>
 </ul>
-<p> 如果你是第一次使用git 会报错  </p>
-<p> 输入 </p>
-<pre><code>git config --global user.name &quot;名字&quot;
-git config --global user.email 邮箱
-</code></pre><p>再次执行 hexo d</p>
-<p>访问项目名就可以看见博客了</p>
+<ul>
+<li><p>开启Mysql</p>
+<pre><code> systemctl start mysqld.service
+
+（下bin目录下）
+ ./mysqld_safe &amp;
+</code></pre></li>
+<li><p>关闭Mysql</p>
+<pre><code> systemctl stop mysqld.service
+
+（在bin目录下）
+ ./mysqladmin -uroot -p shutdown
+</code></pre></li>
+</ul>
+<ul>
+<li><p>进入mysql的命令</p>
+<p>   mysql -u root -p</p>
+<pre><code>/usr/local/mysql5/bin/mysql
+</code></pre></li>
+<li><p>退出mysql</p>
+<pre><code>quit 或者 exit
+</code></pre></li>
+<li><p>查看mysql都有哪些数据库</p>
+<pre><code>show databases;
+</code></pre></li>
+<li><p>创建数据库命令</p>
+<pre><code>create database 数据库名字;        
+</code></pre></li>
+<li><p>进入数据库操作的命令</p>
+<pre><code>use 要进入数据库的名字
+</code></pre></li>
+<li><p>查看数据库里的表名</p>
+<pre><code>show tables;
+</code></pre></li>
+<li><p>创建表</p>
+<pre><code>create table 表名(表字段 表类型,等等);
+</code></pre></li>
+<li><p>查看建表语句</p>
+<pre><code>show create table 表名;
+</code></pre></li>
+<li><p>查看表字段</p>
+<pre><code>desc 表名;
+</code></pre></li>
+<li><p>表中插入数据</p>
+<pre><code>insert into 表名 (表字段，也可以用*代替全部自段) values (对应表字段);
+</code></pre></li>
+<li><p>查看表数据</p>
+<pre><code>select * from 表名;
+</code></pre></li>
+<li><p>条件查询</p>
+<pre><code>select * from 表名 where 条件（比如id=&apos;0003&apos;）;
+</code></pre></li>
+<li><p>多条件查询</p>
+<pre><code>and (多条件查询关键字 两边条件同时满足)  
+select * from 表名 where 条件（id=&apos;1&apos;） add 条件（name=&apos;name&apos;）;
+</code></pre></li>
+<li><p>模糊查询</p>
+<pre><code>like &quot;%%&quot;(模糊查询的关键字) 
+select * from 表名 where 查询的字段 like &quot;%wu%&quot;;
+</code></pre></li>
+<li><p>指定查询数据显示的条数</p>
+<pre><code>limit 条数(显示多条的关键字)
+select * from 表名 limit 条数
+select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
+</code></pre></li>
+</ul>
+<h5 id="服务器数据库与远程服务器建立连接"><a href="#服务器数据库与远程服务器建立连接" class="headerlink" title="服务器数据库与远程服务器建立连接"></a>服务器数据库与远程服务器建立连接</h5><ul>
+<li><p>服务器授权语句（就是授权那台机器可以访问）</p>
+<pre><code> (解读下面的语句= 允许Ip是196.168.9这台机器用zhang这个用户名和1234这个密码访问服务器中的名为user下的所有表)
+ grant all on user.* to zhang@&apos;196.168.9&apos; identified by &quot;1234&quot;;
+ grant all on 数据库名.* to 密码@&apos;ip&apos; identified by &quot;密码&quot;;
+（上面是可以查看修改 下面授权只能查看）
+</code></pre></li>
+</ul>
 
       
       
@@ -780,7 +765,7 @@ git config --global user.email 邮箱
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客-Next的学习目录/">Hexo博客+Next的学习目录</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
 
       
@@ -1375,10 +1360,10 @@ password_expired：密码过期 Y,说明该用户密码已过期 N相反
 
 
   
-    <article id="post-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-manong商城学习笔记-java-ssm-3-1" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/L-mysql的基本命令.html" class="article-date">
+      <a href="/manong商城学习笔记-java-ssm-3-1.html" class="article-date">
       <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
 </a>
     </div>
@@ -1392,7 +1377,7 @@ password_expired：密码过期 Y,说明该用户密码已过期 N相反
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/L-mysql的基本命令.html">Linux下的mysql的基本命令</a>
+      <a class="article-title" href="/manong商城学习笔记-java-ssm-3-1.html">码农商城（EasyUI的使用）</a>
     </h1>
   
 
@@ -1402,85 +1387,42 @@ password_expired：密码过期 Y,说明该用户密码已过期 N相反
     <div class="article-entry" itemprop="articleBody">
       
           
-        <ul>
-<li><p>查看服务器上的mysql是否启动</p>
-<pre><code>1. ps -ef |grep mysql
-2. netstat -nlp
+        <p>参考视频：<br><a href="https://www.bilibili.com/video/av32045814" target="_blank" rel="noopener">https://www.bilibili.com/video/av32045814</a></p>
+<h4 id="后台管理系统-EasyUI-的使用"><a href="#后台管理系统-EasyUI-的使用" class="headerlink" title="后台管理系统 EasyUI 的使用"></a>后台管理系统 EasyUI 的使用</h4><p>进入官网查看：<br><a href="http://www.jeasyui.net/" target="_blank" rel="noopener">http://www.jeasyui.net/</a></p>
+<h5 id="下载-部署到项目"><a href="#下载-部署到项目" class="headerlink" title="下载-部署到项目"></a>下载-部署到项目</h5><p>点击下载  看到jQuery 点击下载 进入以后找到下载进行下载</p>
+<p>找到文档 开始使用</p>
+<ul>
+<li>开始使用 jQuery EasyUI</li>
+</ul>
+<p>下载库，并在您的页面中引用 EasyUI CSS 和 JavaScript 文件。</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;easyui/themes/default/easyui.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;easyui/themes/icon.css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;easyui/jquery-1.7.2.min.js&quot;&gt;
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;easyui/jquery.easyui.min.js&quot;&gt;
+&lt;/script&gt;
+</code></pre><p>根据你下载的找到要用的css 和 js 放在项目中 然后改动href的路径（改成你存放的路径）</p>
+<ul>
+<li><p>在manong_manager_web中找到配置文件spring-mvc.xml 进行静态资源的映射</p>
+<pre><code>&lt;mvc:resources mapping=&quot;/css/**&quot; location=&quot;/WEB-INF/css/&quot;/&gt;
+&lt;mvc:resources mapping=&quot;/js/**&quot; location=&quot;/WEB-INF/js/&quot;/&gt;
 </code></pre></li>
+<li><p>在manong_manager_web中找到controller 创建IndexController.java</p>
+<pre><code>@Controller
+public class IndexController {
+
+    @RequestMapping(&quot;/&quot;)
+    public String requestIndex(String name){
+        return &quot;index&quot;;
+    }
+}
+</code></pre></li>
+<li><p>找到Easyui文档下的Layout布局</p>
+<p>  进行自己想要的效果改动代码</p>
+</li>
 </ul>
 <ul>
-<li><p>开启Mysql</p>
-<pre><code> systemctl start mysqld.service
-
-（下bin目录下）
- ./mysqld_safe &amp;
-</code></pre></li>
-<li><p>关闭Mysql</p>
-<pre><code> systemctl stop mysqld.service
-
-（在bin目录下）
- ./mysqladmin -uroot -p shutdown
-</code></pre></li>
-</ul>
-<ul>
-<li><p>进入mysql的命令</p>
-<p>   mysql -u root -p</p>
-<pre><code>/usr/local/mysql5/bin/mysql
-</code></pre></li>
-<li><p>退出mysql</p>
-<pre><code>quit 或者 exit
-</code></pre></li>
-<li><p>查看mysql都有哪些数据库</p>
-<pre><code>show databases;
-</code></pre></li>
-<li><p>创建数据库命令</p>
-<pre><code>create database 数据库名字;        
-</code></pre></li>
-<li><p>进入数据库操作的命令</p>
-<pre><code>use 要进入数据库的名字
-</code></pre></li>
-<li><p>查看数据库里的表名</p>
-<pre><code>show tables;
-</code></pre></li>
-<li><p>创建表</p>
-<pre><code>create table 表名(表字段 表类型,等等);
-</code></pre></li>
-<li><p>查看建表语句</p>
-<pre><code>show create table 表名;
-</code></pre></li>
-<li><p>查看表字段</p>
-<pre><code>desc 表名;
-</code></pre></li>
-<li><p>表中插入数据</p>
-<pre><code>insert into 表名 (表字段，也可以用*代替全部自段) values (对应表字段);
-</code></pre></li>
-<li><p>查看表数据</p>
-<pre><code>select * from 表名;
-</code></pre></li>
-<li><p>条件查询</p>
-<pre><code>select * from 表名 where 条件（比如id=&apos;0003&apos;）;
-</code></pre></li>
-<li><p>多条件查询</p>
-<pre><code>and (多条件查询关键字 两边条件同时满足)  
-select * from 表名 where 条件（id=&apos;1&apos;） add 条件（name=&apos;name&apos;）;
-</code></pre></li>
-<li><p>模糊查询</p>
-<pre><code>like &quot;%%&quot;(模糊查询的关键字) 
-select * from 表名 where 查询的字段 like &quot;%wu%&quot;;
-</code></pre></li>
-<li><p>指定查询数据显示的条数</p>
-<pre><code>limit 条数(显示多条的关键字)
-select * from 表名 limit 条数
-select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
-</code></pre></li>
-</ul>
-<h5 id="服务器数据库与远程服务器建立连接"><a href="#服务器数据库与远程服务器建立连接" class="headerlink" title="服务器数据库与远程服务器建立连接"></a>服务器数据库与远程服务器建立连接</h5><ul>
-<li><p>服务器授权语句（就是授权那台机器可以访问）</p>
-<pre><code> (解读下面的语句= 允许Ip是196.168.9这台机器用zhang这个用户名和1234这个密码访问服务器中的名为user下的所有表)
- grant all on user.* to zhang@&apos;196.168.9&apos; identified by &quot;1234&quot;;
- grant all on 数据库名.* to 密码@&apos;ip&apos; identified by &quot;密码&quot;;
-（上面是可以查看修改 下面授权只能查看）
-</code></pre></li>
+<li>布局设置完成  找到Tree 树<br>（树（tree）在网页中以树形结构显示分层数据。它向用户提供展开、折叠、拖拽、编辑和异步加载功能。）</li>
 </ul>
 
       
@@ -1493,7 +1435,7 @@ select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码农商城/">码农商城</a></li></ul>
     </div>
 
       
@@ -1686,10 +1628,10 @@ select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
 
 
   
-    <article id="post-manong商城学习笔记-java-ssm-3-1" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-hexo-github搭建自己的博客" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/manong商城学习笔记-java-ssm-3-1.html" class="article-date">
+      <a href="/hexo-github搭建自己的博客.html" class="article-date">
       <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
 </a>
     </div>
@@ -1703,7 +1645,7 @@ select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/manong商城学习笔记-java-ssm-3-1.html">码农商城（EasyUI的使用）</a>
+      <a class="article-title" href="/hexo-github搭建自己的博客.html">hexo学习</a>
     </h1>
   
 
@@ -1713,43 +1655,101 @@ select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>参考视频：<br><a href="https://www.bilibili.com/video/av32045814" target="_blank" rel="noopener">https://www.bilibili.com/video/av32045814</a></p>
-<h4 id="后台管理系统-EasyUI-的使用"><a href="#后台管理系统-EasyUI-的使用" class="headerlink" title="后台管理系统 EasyUI 的使用"></a>后台管理系统 EasyUI 的使用</h4><p>进入官网查看：<br><a href="http://www.jeasyui.net/" target="_blank" rel="noopener">http://www.jeasyui.net/</a></p>
-<h5 id="下载-部署到项目"><a href="#下载-部署到项目" class="headerlink" title="下载-部署到项目"></a>下载-部署到项目</h5><p>点击下载  看到jQuery 点击下载 进入以后找到下载进行下载</p>
-<p>找到文档 开始使用</p>
+        <p>1 . 安装node.js</p>
 <ul>
-<li>开始使用 jQuery EasyUI</li>
-</ul>
-<p>下载库，并在您的页面中引用 EasyUI CSS 和 JavaScript 文件。</p>
-<pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;easyui/themes/default/easyui.css&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;easyui/themes/icon.css&quot;&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;easyui/jquery-1.7.2.min.js&quot;&gt;
-&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;easyui/jquery.easyui.min.js&quot;&gt;
-&lt;/script&gt;
-</code></pre><p>根据你下载的找到要用的css 和 js 放在项目中 然后改动href的路径（改成你存放的路径）</p>
-<ul>
-<li><p>在manong_manager_web中找到配置文件spring-mvc.xml 进行静态资源的映射</p>
-<pre><code>&lt;mvc:resources mapping=&quot;/css/**&quot; location=&quot;/WEB-INF/css/&quot;/&gt;
-&lt;mvc:resources mapping=&quot;/js/**&quot; location=&quot;/WEB-INF/js/&quot;/&gt;
-</code></pre></li>
-<li><p>在manong_manager_web中找到controller 创建IndexController.java</p>
-<pre><code>@Controller
-public class IndexController {
-
-    @RequestMapping(&quot;/&quot;)
-    public String requestIndex(String name){
-        return &quot;index&quot;;
-    }
-}
-</code></pre></li>
-<li><p>找到Easyui文档下的Layout布局</p>
-<p>  进行自己想要的效果改动代码</p>
+<li><p>也可以官网下载</p>
+</li>
+<li><p>下载地址 链接：<a href="https://pan.baidu.com/s/1B3BDbJCcpVzEI6lmD0OEaQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1B3BDbJCcpVzEI6lmD0OEaQ</a><br>   提取码：dgpq </p>
+</li>
+<li><p>一直next下去</p>
+</li>
+<li><p>查看是否安装成功  打开命令行  输入 node -v  显示版本号说明成功</p>
 </li>
 </ul>
+<p>2 . 注册gitHub</p>
 <ul>
-<li>布局设置完成  找到Tree 树<br>（树（tree）在网页中以树形结构显示分层数据。它向用户提供展开、折叠、拖拽、编辑和异步加载功能。）</li>
+<li><p>打开官网 <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
+</li>
+<li><p>不会注册的可以自行百度</p>
+</li>
+<li><p>创建项目 new repository </p>
+</li>
+<li><p>输入项目名 必须是你的 用户名.github.io</p>
+</li>
+<li><p>勾选public </p>
+</li>
+<li><p>勾选initializ ……………..</p>
+</li>
+<li><p>然后Create repositorty</p>
+</li>
+<li><p>创建成功  </p>
+</li>
 </ul>
+<p>3 . Git 安装</p>
+<p>也可以官网下载（我的是w8）</p>
+<p>-链接：<a href="https://pan.baidu.com/s/1_odiVJQ7WWfWmRC33YmjLQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1_odiVJQ7WWfWmRC33YmjLQ</a><br> 提取码：td45 </p>
+<ul>
+<li>也是一直next下去</li>
+</ul>
+<p>-测试是否成功  打开cmd  输入 git  有显示成功！</p>
+<p>4 . githubSSH配置（看不懂了可以转达到git教程上进行学习）</p>
+<ul>
+<li>打开git 命令行</li>
+<li>输入 ssh-keygen -t rsa -C “自己的邮箱”</li>
+<li><p>然后回车 </p>
+</li>
+<li><p>找到下载好的文件 （.git）</p>
+</li>
+<li>复制到gitHub上进行设置</li>
+</ul>
+<p>5 . 使用hexo</p>
+<ul>
+<li><p>打看 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a> 官网</p>
+</li>
+<li><p>你想安装到哪里就在哪里创建文件夹 </p>
+</li>
+<li>然后右键打看git B…</li>
+<li><p>输入  npm install hexo-cli -g </p>
+</li>
+<li><p>等待安装 </p>
+</li>
+<li><p>初始化 hexo init 名字 （工程名字 随便）</p>
+</li>
+<li><p>cd 你起得名字 </p>
+</li>
+<li><p>npm install</p>
+</li>
+<li><p>hexo s -p8080 (本地运行)</p>
+</li>
+<li><p>成功测试  在浏览器上输入localhost:8080  就会出现画面</p>
+</li>
+</ul>
+<p>6 . 部署到GitHub 上</p>
+<p>在开始之前，您必须先在 _config.yml 中修改参数（在项目下找到）</p>
+<p>修改最下面  </p>
+<pre><code> deploy:
+  type: git
+  repo:
+type: heroku（git上考的地址）
+repo:
+</code></pre><p>下载插件<br>   执行   npm install hexo-deployer-git –save</p>
+<pre><code>deploy:
+ type: git
+ repo: &lt;repository url&gt; #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+ branch: [branch] #published
+ message: [message]
+</code></pre><ul>
+<li><p>执行 </p>
+<pre><code>hexo -g 
+hexo -d
+</code></pre></li>
+</ul>
+<p> 如果你是第一次使用git 会报错  </p>
+<p> 输入 </p>
+<pre><code>git config --global user.name &quot;名字&quot;
+git config --global user.email 邮箱
+</code></pre><p>再次执行 hexo d</p>
+<p>访问项目名就可以看见博客了</p>
 
       
       
@@ -1761,7 +1761,7 @@ public class IndexController {
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码农商城/">码农商城</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客-Next的学习目录/">Hexo博客+Next的学习目录</a></li></ul>
     </div>
 
       
