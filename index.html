@@ -1560,71 +1560,6 @@ public class IndexController {
 
 
   
-    <article id="post-mysql-解决mysql不能用Ip登录问题" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mysql-解决mysql不能用Ip登录问题.html" class="article-date">
-      <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mysql-解决mysql不能用Ip登录问题.html">解决mysql不能用Ip登录问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>MySQL localhost 连接，但不能用IP连接问题解决方案</p>
-<p>主要涉及到MySQL 可以用localhost 连接，但不能用IP连接的问题 方面的内容，对于MySQL 可以用localhost 连接，但不能用IP连接的问题</p>
-<p>1.打开cmd窗口，进入MySQL安装的bin目录</p>
-<p>2.执行命令登录数据库,之后会出现一行要你输入密码的 mysql -u root -p</p>
-<p>3.执行以下命令分配新用户：<br>grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘root’; (%) 表示所有ip</p>
-<p>4.执行完上述命令后用下面的命令刷新权限<br>flush privileges;</p>
-<p>5.之后关闭mysql服务，然后启动mysql服务，大功告成</p>
-
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-mysql-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -1732,6 +1667,71 @@ select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
 （上面是可以查看修改 下面授权只能查看）
 </code></pre></li>
 </ul>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysql-解决mysql不能用Ip登录问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-解决mysql不能用Ip登录问题.html" class="article-date">
+      <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-解决mysql不能用Ip登录问题.html">解决mysql不能用Ip登录问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>MySQL localhost 连接，但不能用IP连接问题解决方案</p>
+<p>主要涉及到MySQL 可以用localhost 连接，但不能用IP连接的问题 方面的内容，对于MySQL 可以用localhost 连接，但不能用IP连接的问题</p>
+<p>1.打开cmd窗口，进入MySQL安装的bin目录</p>
+<p>2.执行命令登录数据库,之后会出现一行要你输入密码的 mysql -u root -p</p>
+<p>3.执行以下命令分配新用户：<br>grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘root’; (%) 表示所有ip</p>
+<p>4.执行完上述命令后用下面的命令刷新权限<br>flush privileges;</p>
+<p>5.之后关闭mysql服务，然后启动mysql服务，大功告成</p>
 
       
       
