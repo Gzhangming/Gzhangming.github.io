@@ -154,7 +154,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hexo博客-Next的学习目录/" style="font-size: 10px;">Hexo博客+Next的学习目录</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/服务器的学习/" style="font-size: 10px;">服务器的学习</a> <a href="/tags/码农商城/" style="font-size: 10px;">码农商城</a>
+                        <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/服务器的学习/" style="font-size: 10px;">服务器的学习</a> <a href="/tags/码农商城/" style="font-size: 10px;">码农商城</a>
                     </div>
                 </section>
                 
@@ -238,10 +238,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-hexo-hexo-github搭建自己的博客" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-mysql-L-mysql的基本命令" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/hexo-hexo-github搭建自己的博客.html" class="article-date">
+      <a href="/mysql-L-mysql的基本命令.html" class="article-date">
       <time datetime="2018-12-31T07:01:28.000Z" itemprop="datePublished">2018-12-31</time>
 </a>
     </div>
@@ -255,7 +255,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/hexo-hexo-github搭建自己的博客.html">hexo学习</a>
+      <a class="article-title" href="/mysql-L-mysql的基本命令.html">Linux下的mysql的基本命令</a>
     </h1>
   
 
@@ -265,101 +265,86 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>1 . 安装node.js</p>
-<ul>
-<li><p>也可以官网下载</p>
-</li>
-<li><p>下载地址 链接：<a href="https://pan.baidu.com/s/1B3BDbJCcpVzEI6lmD0OEaQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1B3BDbJCcpVzEI6lmD0OEaQ</a><br>   提取码：dgpq </p>
-</li>
-<li><p>一直next下去</p>
-</li>
-<li><p>查看是否安装成功  打开命令行  输入 node -v  显示版本号说明成功</p>
-</li>
-</ul>
-<p>2 . 注册gitHub</p>
-<ul>
-<li><p>打开官网 <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a></p>
-</li>
-<li><p>不会注册的可以自行百度</p>
-</li>
-<li><p>创建项目 new repository </p>
-</li>
-<li><p>输入项目名 必须是你的 用户名.github.io</p>
-</li>
-<li><p>勾选public </p>
-</li>
-<li><p>勾选initializ ……………..</p>
-</li>
-<li><p>然后Create repositorty</p>
-</li>
-<li><p>创建成功  </p>
-</li>
-</ul>
-<p>3 . Git 安装</p>
-<p>也可以官网下载（我的是w8）</p>
-<p>-链接：<a href="https://pan.baidu.com/s/1_odiVJQ7WWfWmRC33YmjLQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1_odiVJQ7WWfWmRC33YmjLQ</a><br> 提取码：td45 </p>
-<ul>
-<li>也是一直next下去</li>
-</ul>
-<p>-测试是否成功  打开cmd  输入 git  有显示成功！</p>
-<p>4 . githubSSH配置（看不懂了可以转达到git教程上进行学习）</p>
-<ul>
-<li>打开git 命令行</li>
-<li>输入 ssh-keygen -t rsa -C “自己的邮箱”</li>
-<li><p>然后回车 </p>
-</li>
-<li><p>找到下载好的文件 （.git）</p>
-</li>
-<li>复制到gitHub上进行设置</li>
-</ul>
-<p>5 . 使用hexo</p>
-<ul>
-<li><p>打看 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a> 官网</p>
-</li>
-<li><p>你想安装到哪里就在哪里创建文件夹 </p>
-</li>
-<li>然后右键打看git B…</li>
-<li><p>输入  npm install hexo-cli -g </p>
-</li>
-<li><p>等待安装 </p>
-</li>
-<li><p>初始化 hexo init 名字 （工程名字 随便）</p>
-</li>
-<li><p>cd 你起得名字 </p>
-</li>
-<li><p>npm install</p>
-</li>
-<li><p>hexo s -p8080 (本地运行)</p>
-</li>
-<li><p>成功测试  在浏览器上输入localhost:8080  就会出现画面</p>
-</li>
-</ul>
-<p>6 . 部署到GitHub 上</p>
-<p>在开始之前，您必须先在 _config.yml 中修改参数（在项目下找到）</p>
-<p>修改最下面  </p>
-<pre><code> deploy:
-  type: git
-  repo:
-type: heroku（git上考的地址）
-repo:
-</code></pre><p>下载插件<br>   执行   npm install hexo-deployer-git –save</p>
-<pre><code>deploy:
- type: git
- repo: &lt;repository url&gt; #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
- branch: [branch] #published
- message: [message]
-</code></pre><ul>
-<li><p>执行 </p>
-<pre><code>hexo -g 
-hexo -d
+        <ul>
+<li><p>查看服务器上的mysql是否启动</p>
+<pre><code>1. ps -ef |grep mysql
+2. netstat -nlp
 </code></pre></li>
 </ul>
-<p> 如果你是第一次使用git 会报错  </p>
-<p> 输入 </p>
-<pre><code>git config --global user.name &quot;名字&quot;
-git config --global user.email 邮箱
-</code></pre><p>再次执行 hexo d</p>
-<p>访问项目名就可以看见博客了</p>
+<ul>
+<li><p>开启Mysql</p>
+<pre><code> systemctl start mysqld.service
+
+（下bin目录下）
+ ./mysqld_safe &amp;
+</code></pre></li>
+<li><p>关闭Mysql</p>
+<pre><code> systemctl stop mysqld.service
+
+（在bin目录下）
+ ./mysqladmin -uroot -p shutdown
+</code></pre></li>
+</ul>
+<ul>
+<li><p>进入mysql的命令</p>
+<p>   mysql -u root -p</p>
+<pre><code>/usr/local/mysql5/bin/mysql
+</code></pre></li>
+<li><p>退出mysql</p>
+<pre><code>quit 或者 exit
+</code></pre></li>
+<li><p>查看mysql都有哪些数据库</p>
+<pre><code>show databases;
+</code></pre></li>
+<li><p>创建数据库命令</p>
+<pre><code>create database 数据库名字;        
+</code></pre></li>
+<li><p>进入数据库操作的命令</p>
+<pre><code>use 要进入数据库的名字
+</code></pre></li>
+<li><p>查看数据库里的表名</p>
+<pre><code>show tables;
+</code></pre></li>
+<li><p>创建表</p>
+<pre><code>create table 表名(表字段 表类型,等等);
+</code></pre></li>
+<li><p>查看建表语句</p>
+<pre><code>show create table 表名;
+</code></pre></li>
+<li><p>查看表字段</p>
+<pre><code>desc 表名;
+</code></pre></li>
+<li><p>表中插入数据</p>
+<pre><code>insert into 表名 (表字段，也可以用*代替全部自段) values (对应表字段);
+</code></pre></li>
+<li><p>查看表数据</p>
+<pre><code>select * from 表名;
+</code></pre></li>
+<li><p>条件查询</p>
+<pre><code>select * from 表名 where 条件（比如id=&apos;0003&apos;）;
+</code></pre></li>
+<li><p>多条件查询</p>
+<pre><code>and (多条件查询关键字 两边条件同时满足)  
+select * from 表名 where 条件（id=&apos;1&apos;） add 条件（name=&apos;name&apos;）;
+</code></pre></li>
+<li><p>模糊查询</p>
+<pre><code>like &quot;%%&quot;(模糊查询的关键字) 
+select * from 表名 where 查询的字段 like &quot;%wu%&quot;;
+</code></pre></li>
+<li><p>指定查询数据显示的条数</p>
+<pre><code>limit 条数(显示多条的关键字)
+select * from 表名 limit 条数
+select * from 表名 where 查询的字段 like &quot;%wu%&quot; limit 条数;
+</code></pre></li>
+</ul>
+<h5 id="服务器数据库与远程服务器建立连接"><a href="#服务器数据库与远程服务器建立连接" class="headerlink" title="服务器数据库与远程服务器建立连接"></a>服务器数据库与远程服务器建立连接</h5><ul>
+<li><p>服务器授权语句（就是授权那台机器可以访问）</p>
+<pre><code> (解读下面的语句= 允许Ip是196.168.9这台机器用zhang这个用户名和1234这个密码访问服务器中的名为user下的所有表)
+ grant all on user.* to zhang@&apos;196.168.9&apos; identified by &quot;1234&quot;;
+ grant all on 数据库名.* to 密码@&apos;ip&apos; identified by &quot;密码&quot;;
+（上面是可以查看修改 下面授权只能查看）
+</code></pre></li>
+</ul>
 
       
       
@@ -371,7 +356,7 @@ git config --global user.email 邮箱
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
 
       
